@@ -8,17 +8,24 @@ class Visitor{
         this.comment = comment;
         this.helper = helper;
     }
+    
+    getId(){
+    const FileSet = require('file-set');
+       var files = new FileSet('*.json');
+         let y = files.files.filter((jsonFiles) => {
+            return jsonFiles
+          });
+        return y.length+1
+        
+    }
+
     save(){
-        var n = 0
-        function increase(){
-            n++
-            return n
-        }
+        var x = this.getId()
         const fs = require('fs')
         let visitor = new Visitor(this.fullname,this.age,this.date,this.time,this.comment,this.helper)
         let data = JSON.stringify(visitor,null,2)
         
-        fs.writeFile(`visitor_${increase()}.json`,data,(err)=>{
+        fs.writeFile(`visitor_${x}.json`,data,(err)=>{
        if(err){
            console.log('File read failed: ',err)
            
@@ -27,7 +34,18 @@ class Visitor{
        return
        
    })
-   
+   return `visitor_${x}.json`
+   }
+   load(id){
+    const fs = require('fs')
+    fs.readFile(`visitor_${id}.json`,'utf8',(err,data)=>{
+        if(err){
+            console.log('File read failed:',err)
+            return 
+        }
+         console.log(data)
+    })
+ return this.fullname + "'s file"
    }
 }
-
+ 
