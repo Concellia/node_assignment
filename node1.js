@@ -1,5 +1,5 @@
 
-class Visitor{
+ class Visitor{
     constructor(fullname,age,date,time,comment,helper){
         this.fullname = fullname;
         this.age = age;
@@ -11,7 +11,7 @@ class Visitor{
     
     getId(){
     const FileSet = require('file-set');
-       var files = new FileSet('*.json');
+       var files = new FileSet('*.JSON');
          let y = files.files.filter((jsonFiles) => {
             return jsonFiles
           });
@@ -25,7 +25,7 @@ class Visitor{
         let visitor = new Visitor(this.fullname,this.age,this.date,this.time,this.comment,this.helper)
         let data = JSON.stringify(visitor,null,2)
         
-        fs.writeFile(`visitor_${x}.json`,data,(err)=>{
+        fs.writeFile(`visitor_${x}.JSON`,data,(err)=>{
        if(err){
            console.log('File read failed: ',err)
            
@@ -34,11 +34,11 @@ class Visitor{
        return
        
    })
-   return `visitor_${x}.json`
+   return `visitor_${x}.JSON`
    }
    load(id){
     const fs = require('fs')
-    fs.readFile(`visitor_${id}.json`,'utf8',(err,data)=>{
+    fs.readFile(`visitor_${id}.JSON`,'utf8',(err,data)=>{
         if(err){
             console.log('File read failed:',err)
             return 
@@ -48,4 +48,5 @@ class Visitor{
  return this.fullname + "'s file"
    }
 }
- 
+
+module.exports = Visitor
